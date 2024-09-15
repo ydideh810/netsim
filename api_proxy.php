@@ -1,6 +1,6 @@
 <?php
 $openrouter_api_key2 = 'YOUR_OPENROUTER_API_KEY';
-$openrouter_api_key = 'YOUR_OPENROUTER_API_KEY';
+$openrouter_api_key = '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';
 
 
 header('Access-Control-Allow-Origin: *');
