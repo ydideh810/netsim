@@ -7,6 +7,7 @@ let isEditMode = false;
 let currentEditElement = null;
 let editMenuVisible = false;
 let lastUserInput = '';
+let choices = '';
 
 const loadingTexts = [
     "Brewing some digital magic...",
