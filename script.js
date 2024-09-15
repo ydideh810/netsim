@@ -228,7 +228,7 @@ Remember to generate all necessary code to create a complete, working simulation
         });
 
         updateStatusBar("Receiving data...");
-        const generatedHtml = response.data.choices[0].message.content;
+        const generatedHtml = response.data.choices.message.content;
         currentSimulation = generatedHtml;
 
         const content = document.getElementById('content');
@@ -331,7 +331,7 @@ Remember to generate all necessary code to create a complete, working simulation
 
         updateStatusBar("Receiving updated data...");
 
-        const updatedHtml = response.data.choices[0].message.content;
+        const updatedHtml = response.data.choices.message.content;
         currentSimulation = updatedHtml;
 
         const content = document.getElementById('content');
@@ -852,7 +852,7 @@ Provide only the improved prompt as your response, without any additional explan
             model: "gpt-4o"
         });
 
-        const improvedPrompt = response.data.choices[0].message.content;
+        const improvedPrompt = response.data.choices.message.content;
         
         loadingOverlay.style.display = 'none';
         
