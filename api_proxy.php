@@ -51,7 +51,7 @@ if ($data['model'] === 'gpt-4o') {
     $headers = [
         'Authorization: Bearer ' . $api_key,
         'Content-Type: application/json',
-        'HTTP-Referer: https://YOUR_WEBSITE_HERE.com',
+        'HTTP-Referer: https://netsim-production.up.railway.app',
         'X-Title: NetSim Web Simulator'
     ];
     $model = 'anthropic/claude-3.5-sonnet';
@@ -96,7 +96,7 @@ function handleFileUpload() {
     $filePath = __DIR__ . '/websites/' . $uniqueId . '.html';
 
     if (move_uploaded_file($_FILES['file']['tmp_name'], $filePath)) {
-        $baseUrl = 'https://YOUR_WEBSITE_HERE.com';
+        $baseUrl = 'https://netsim-production.up.railway.app';
         $generatedUrl = $baseUrl . '/websites/' . $uniqueId . '.html';
         echo json_encode(['url' => $generatedUrl]);
     } else {
