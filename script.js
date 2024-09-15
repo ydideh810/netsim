@@ -330,6 +330,11 @@ Remember to generate all necessary code to create a complete, working simulation
         });
 
         updateStatusBar("Receiving updated data...");
+        
+        if (response.data && response.data.choices && response.data.choices.length > 0) {
+        const generatedHtml = response.data.choices[0].message.content;
+        currentSimulation = generatedHtml;
+
 
         const updatedHtml = response.data.choices[0].message.content;
         currentSimulation = updatedHtml;
