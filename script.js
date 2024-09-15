@@ -227,7 +227,9 @@ Remember to generate all necessary code to create a complete, working simulation
             model: currentModel
         });
 
-        updateStatusBar("Receiving data...");
+         updateStatusBar("Receiving data...");
+
+    if (response.data && response.data.choices && response.data.choices.length > 0) {
         const generatedHtml = response.data.choices[0].message.content;
         currentSimulation = generatedHtml;
 
@@ -237,37 +239,14 @@ Remember to generate all necessary code to create a complete, working simulation
         frame.contentDocument.open();
         frame.contentDocument.write(generatedHtml);
         frame.contentDocument.close();
-
-        frame.onload = async () => {
-            history.push({input: input, simulation: currentSimulation});
-            updateAddressBar(input);
-
-            updateStatusBar("Web application loaded");
-            updatePageTitle(`NetSim: ${input}`);
-
-            currentProjectId = Date.now().toString();
-            await saveRevision(input);
-
-            cachedPages[input] = currentSimulation;
-
-            showPublishButton();
-
-            clearInputAndSetPlaceholder();
-            isEditMode = true;
-
-            
-            ldb.set('netsim_history', LZString.compressToUTF16(JSON.stringify(history)));
-
-            
-            frame.contentDocument.addEventListener('contextmenu', handleRightClick);
-            frame.contentDocument.addEventListener('click', handleLeftClick);
-        };
-    } catch (error) {
-        const content = document.getElementById('content');
-        content.innerHTML = `<div class="text-center p-8"><h2 class="text-2xl font-bold text-red-600">Error creating web application: ${error.message}</h2><p class="mt-4">Please try again later.</p></div>`;
-        console.error('Error:', error);
-        updateStatusBar("Error creating web application");
+    } else {
+        throw new Error('Unexpected response structure from API');
     }
+} catch (error) {
+    const content = document.getElementById('content');
+    content.innerHTML = `<div class="text-center p-8"><h2 class="text-2xl font-bold text-red-600">Error creating web application: ${error.message}</h2><p class="mt-4">Please try again later.</p></div>`;
+    console.error('Error:', error);
+    updateStatusBar("Error creating web application");
 }
 
 async function continueSimulation(additionalInput) {
