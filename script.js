@@ -140,7 +140,7 @@ function updateAddressBar(text) {
 }
 
 async function fetchPixabayImages(query, count = 5) {
-    const apiKey = 'YOUR_PIXABAY_API';
+    const apiKey = '46003216-22fe86f55d3880937fdd6f3ad';
     const url = `https://pixabay.com/api/?key=${apiKey}&q=${encodeURIComponent(query)}&per_page=${count}&image_type=vector,illustration`;
 
     try {
