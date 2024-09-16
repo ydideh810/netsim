@@ -9,14 +9,7 @@ let editMenuVisible = false;
 let lastUserInput = '';
 let generatedHtml = '';
 
-if (response.data && response.data.choices && response.data.choices.length > 0) {
-    // If choices exist and have at least one element, access the first one
-    generatedHtml = response.data.choices[0].message.content;
-} else {
-    // Handle the case where choices is undefined or empty
-    console.error('Error: choices array is undefined or empty.');
-    throw new Error('Unexpected API response: choices array is missing or empty.');
-}
+
 
 const loadingTexts = [
     "Brewing some digital magic...",
@@ -240,6 +233,15 @@ Remember to generate all necessary code to create a complete, working simulation
         updateStatusBar("Receiving data...");
         const generatedHtml = response.data.choices[0].message.content;
         currentSimulation = generatedHtml;
+     
+        if (response.data && response.data.choices && response.data.choices.length > 0) {
+    // If choices exist and have at least one element, access the first one
+           generatedHtml = response.data.choices[0].message.content;
+        } else {
+    // Handle the case where choices is undefined or empty
+            console.error('Error: choices array is undefined or empty.');
+            throw new Error('Unexpected API response: choices array is missing or empty.');
+        }
 
         const content = document.getElementById('content');
         content.innerHTML = `<iframe id="simulation-frame" style="width:100%;height:100%;border:none;"></iframe>`;
